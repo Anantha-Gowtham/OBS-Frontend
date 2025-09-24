@@ -1,0 +1,106 @@
+/* Design tokens (Banking Palette) */
+:root {
+	/* Luxury Dark Core */
+	--color-primary: #121B38; /* Midnight */
+	--color-primary-bright: #1C2A52; /* Slightly lighter for hover */
+	--color-primary-hover: #243665; /* Deeper hover */
+	--color-primary-rgb: 18 27 56;
+	--color-secondary: #FFD700; /* Gold accent */
+	--color-accent-muted: #8C8C8C; /* Dark Silver */
+
+	/* Feedback / Semantic */
+	--color-success: #FFB84D; /* Warm amber for confirmations */
+	--color-error: #DC3545; /* Crimson */
+	--color-warning: #FFB84D; /* Reuse amber */
+	--color-info: #3C9D72; /* Emerald (CTAs / informative) */
+	--color-cta: #3C9D72;
+
+	/* Surfaces & text */
+	--color-bg: #2C2C2C; /* Charcoal */
+	--color-surface: #1A2235; /* Elevated panel */
+	--color-surface-alt: #222B40;
+	--color-border: #38445C;
+	--color-text: #EAEAEA; /* Soft white */
+	--color-text-secondary: #B5BCC9;
+	--color-text-inverse: #121B38;
+
+	/* Radii & shadows */
+	--radius-sm: 6px;
+	--radius-md: 10px;
+	--radius-lg: 16px;
+	--shadow-sm: 0 2px 4px -1px rgba(0 0 0 / 0.6), 0 1px 3px rgba(0 0 0 / 0.5);
+	--shadow-md: 0 6px 22px -4px rgba(0 0 0 / 0.55), 0 10px 32px -6px rgba(0 0 0 / 0.45);
+	--shadow-focus: 0 0 0 3px rgba(255 215 0 / 0.4);
+
+	/* Transitions */
+	--transition-theme: background-color .55s ease, color .45s ease, border-color .45s ease;
+	--transition-base: .25s cubic-bezier(.16,.84,.44,1);
+}
+
+body { background: var(--color-bg); color: var(--color-text); }
+
+/* Interactive states */
+a, button { transition: background-color var(--transition-base), color var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base); }
+a { color: var(--color-primary-bright); }
+a:hover { color: var(--color-primary-hover); }
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible { outline: 2px solid var(--color-primary-hover); outline-offset: 2px; box-shadow: var(--shadow-focus); }
+
+.btn-primary { background: var(--color-primary-bright); color: var(--color-text-inverse); border: 1px solid var(--color-primary-bright); }
+.btn-primary:hover { background: var(--color-primary-hover); border-color: var(--color-primary-hover); }
+.btn-outline { background: transparent; border: 1px solid var(--color-primary-bright); color: var(--color-primary-bright); }
+.btn-outline:hover { background: rgba(var(--color-primary-rgb) / 0.06); }
+
+/* Dark mode */
+/* (dark-theme class intentionally unused; luxury palette is already dark) */
+
+html, body, #root { transition: var(--transition-theme); }
+
+/* Surface helper */
+.surface { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+
+/* Animation utilities */
+@keyframes fadeUp {
+	0% { opacity: 0; transform: translateY(28px); }
+	70% { opacity: 1; }
+	100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes scaleIn {
+	0% { opacity: 0; transform: scale(.92); }
+	60% { opacity: 1; }
+	100% { opacity: 1; transform: scale(1); }
+}
+@keyframes shimmerSlow {
+	0% { background-position: 0% 50%; }
+	100% { background-position: 100% 50%; }
+}
+
+.fade-up { animation: fadeUp .8s cubic-bezier(.16,.84,.44,1) both; }
+.fade-up.delay-1 { animation-delay: .1s; }
+.fade-up.delay-2 { animation-delay: .2s; }
+.fade-up.delay-3 { animation-delay: .3s; }
+.fade-up.delay-4 { animation-delay: .4s; }
+.fade-up.delay-5 { animation-delay: .5s; }
+
+.scale-in { animation: scaleIn .7s cubic-bezier(.25,.8,.25,1) both; }
+
+@keyframes skeleton-slide { 0% { transform: translateX(-100%);} 100% { transform: translateX(100%);} }
+
+/* Subtle gradient shimmer background helper */
+.gradient-animated {
+	background: linear-gradient(140deg,#121B38,#1C2A52,#243665,#121B38);
+	background-size: 300% 300%;
+	animation: shimmerSlow 18s ease-in-out infinite;
+}
+
+/* Page transition */
+.page-transition-enter { opacity: 0; transform: translateY(12px); }
+.page-transition-enter-active { opacity: 1; transform: translateY(0); transition: opacity .45s ease, transform .55s cubic-bezier(.16,.84,.44,1); }
+.page-transition-exit { opacity: 1; }
+.page-transition-exit-active { opacity: 0; transform: translateY(-8px); transition: opacity .35s ease, transform .4s ease; }
+
+/* Reduce motion preference */
+@media (prefers-reduced-motion: reduce) {
+	.fade-up, .scale-in, .gradient-animated { animation: none !important; }
+}

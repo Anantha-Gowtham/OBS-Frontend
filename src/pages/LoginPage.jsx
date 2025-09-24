@@ -1,0 +1,245 @@
+import React, { useState } from 'react';
+import {
+  Box,
+  Container,
+  Paper,
+  TextField,
+  Button,
+  Typography,
+  Alert,
+  CircularProgress,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Divider,
+  Card,
+  CardContent
+} from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { AccountBalance, Person, Work, AdminPanelSettings } from '@mui/icons-material';
+import { useAuth } from '../contexts/AuthContext';
+import DemoModeIndicator from '../components/DemoModeIndicator';
+
+const LoginPage = () => {
+  const navigate = useNavigate();
+  const { login } = useAuth();
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+    role: 'USER'
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const roles = [
+    { value: 'ADMIN', label: 'System Administrator', icon: <AdminPanelSettings />, color: 'error.main' },
+    { value: 'MANAGER', label: 'Branch Manager', icon: <Work />, color: 'warning.main' },
+    { value: 'USER', label: 'Customer', icon: <AccountBalance />, color: 'success.main' }
+  ];
+
+  const demoCredentials = [
+    { username: 'admin', password: 'admin123', role: 'ADMIN' },
+    { username: 'manager', password: 'manager123', role: 'MANAGER' },
+    { username: 'user', password: 'user123', role: 'USER' }
+  ];
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+    setError('');
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+
+    try {
+      const response = await login(formData.username, formData.password);
+
+      if (response.success) {
+        // Navigate based on role
+        switch (response.user.role) {
+          case 'ADMIN':
+            navigate('/admin/dashboard');
+            break;
+          case 'MANAGER':
+            navigate('/manager/dashboard');
+            break;
+          case 'USER':
+            navigate('/user/dashboard');
+            break;
+          default:
+            navigate('/dashboard');
+        }
+      } else {
+        setError(response.message || 'Invalid credentials');
+      }
+    } catch (err) {
+      setError('Login failed. Please try again.');
+      console.error('Login error:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fillDemo = (role) => {
+    const credential = demoCredentials.find(cred => cred.role === role);
+    if (credential) {
+      setFormData({
+        username: credential.username,
+        password: credential.password
+      });
+    }
+  };
+
+  return (
+    <Box sx={{
+      minHeight: '100vh',
+      background: (theme) => `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
+      display: 'flex',
+      alignItems: 'center',
+      py: 4
+    }}>
+      <Container maxWidth="md">
+        <Box sx={{ textAlign: 'center', mb: 4 }}>
+          <Typography variant="h3" sx={{ color: 'white', fontWeight: 'bold', mb: 1 }}>
+            OBS Banking System
+          </Typography>
+          <Typography variant="h6" sx={{ color: 'rgba(255,255,255,0.8)' }}>
+            Login to your account
+          </Typography>
+        </Box>
+
+        <Box sx={{ display: 'flex', gap: 3, alignItems: 'flex-start' }}>
+          {/* Login Form */}
+          <Paper sx={{ p: 4, flex: 1, maxWidth: 400 }}>
+            <Typography variant="h5" sx={{ mb: 3, textAlign: 'center', fontWeight: 'bold' }}>
+              Sign In
+            </Typography>
+
+            <DemoModeIndicator />
+
+            {error && (
+              <Alert severity="error" sx={{ mb: 3 }}>
+                {error}
+              </Alert>
+            )}
+
+            <form onSubmit={handleSubmit}>
+              <TextField
+                fullWidth
+                label="Username"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                required
+                sx={{ mb: 3 }}
+                autoComplete="username"
+              />
+
+              <TextField
+                fullWidth
+                label="Password"
+                name="password"
+                type="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                sx={{ mb: 3 }}
+                autoComplete="current-password"
+              />
+
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                disabled={loading}
+                sx={{ mb: 2, py: 1.5 }}
+              >
+                {loading ? <CircularProgress size={24} /> : 'Sign In'}
+              </Button>
+
+              <Divider sx={{ my: 2 }} />
+
+              <Button
+                fullWidth
+                variant="outlined"
+                onClick={() => navigate('/')}
+                sx={{ mb: 1 }}
+              >
+                Back to Home
+              </Button>
+
+              <Button
+                fullWidth
+                variant="text"
+                onClick={() => navigate('/register')}
+              >
+                Don't have an account? Register
+              </Button>
+            </form>
+          </Paper>
+
+          {/* Demo Credentials */}
+          <Card sx={{ flex: 1, maxWidth: 350 }}>
+            <CardContent>
+              <Typography variant="h6" sx={{ mb: 2, fontWeight: 'bold', color: 'primary.main' }}>
+                Demo Credentials
+              </Typography>
+              <Typography variant="body2" sx={{ mb: 3, color: 'text.secondary' }}>
+                Click any role below to auto-fill login credentials:
+              </Typography>
+
+              {roles.map((role) => {
+                const credential = demoCredentials.find(cred => cred.role === role.value);
+                return (
+                  <Card 
+                    key={role.value} 
+                    sx={{ 
+                      mb: 2, 
+                      cursor: 'pointer',
+                      border: '1px solid',
+                      borderColor: 'grey.300',
+                      '&:hover': {
+                        backgroundColor: 'grey.50',
+                        borderColor: role.color
+                      }
+                    }}
+                    onClick={() => fillDemo(role.value)}
+                  >
+                    <CardContent sx={{ py: 2 }}>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                        <Box sx={{ color: role.color }}>
+                          {role.icon}
+                        </Box>
+                        <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
+                          {role.label}
+                        </Typography>
+                      </Box>
+                      <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                        Username: <strong>{credential?.username}</strong>
+                      </Typography>
+                      <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                        Password: <strong>{credential?.password}</strong>
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+
+              <Alert severity="info" sx={{ mt: 2 }}>
+                This is a demo system. In production, use your actual credentials.
+              </Alert>
+            </CardContent>
+          </Card>
+        </Box>
+      </Container>
+    </Box>
+  );
+};
+
+export default LoginPage;

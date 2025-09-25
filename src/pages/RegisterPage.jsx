@@ -116,22 +116,57 @@ const RegisterPage = () => {
   return (
     <Box sx={{
       minHeight: '100vh',
-      background: (theme) => `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
+      backgroundColor: 'primary.main', // Solid black background
       display: 'flex',
       alignItems: 'center',
-      py: 4
+      py: 6
     }}>
-      <Container maxWidth="sm">
-        <Box sx={{ textAlign: 'center', mb: 4 }}>
-          <Typography variant="h3" sx={{ color: 'white', fontWeight: 'bold', mb: 1 }}>
+      <Container maxWidth="lg">
+        {/* Enhanced Header Section */}
+        <Box sx={{ textAlign: 'center', mb: 6 }}>
+          <Typography variant="h3" sx={{ 
+            color: 'white', 
+            fontWeight: 'bold', 
+            mb: 2,
+            fontSize: { xs: '2rem', md: '3rem' }
+          }}>
             OBS Banking System
           </Typography>
-          <Typography variant="h6" sx={{ color: 'rgba(255,255,255,0.8)' }}>
+          <Typography variant="h6" sx={{ 
+            color: 'rgba(255,255,255,0.8)',
+            fontSize: { xs: '1rem', md: '1.25rem' },
+            maxWidth: '500px',
+            mx: 'auto'
+          }}>
             Create your account
           </Typography>
+          <Box sx={{ 
+            width: 80, 
+            height: 4, 
+            bgcolor: 'white', 
+            mx: 'auto',
+            borderRadius: 2,
+            mt: 3,
+            mb: 4,
+            opacity: 0.8
+          }} />
         </Box>
 
-        <Paper sx={{ p: 4 }}>
+        {/* Enhanced Registration Form with Perfect Center Alignment */}
+        <Box sx={{ 
+          display: 'flex', 
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}>
+          <Paper sx={{ 
+            p: { xs: 3, md: 5 }, 
+            maxWidth: 600,
+            width: '100%',
+            borderRadius: 4,
+            boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
+            border: '1px solid rgba(255,255,255,0.1)',
+            backgroundColor: 'rgba(255,255,255,0.98)'
+          }}>
           <Typography variant="h5" sx={{ mb: 3, textAlign: 'center', fontWeight: 'bold' }}>
             Register
           </Typography>
@@ -278,6 +313,7 @@ const RegisterPage = () => {
             </Typography>
           </Alert>
         </Paper>
+        </Box>
       </Container>
     </Box>
   );

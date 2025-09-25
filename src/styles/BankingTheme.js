@@ -1,45 +1,43 @@
 // Banking Theme Configuration for Material-UI
 import { createTheme } from '@mui/material/styles';
 
-export const bankingTheme = createTheme({
+export const professionalTheme = createTheme({
   palette: {
-    primary: { main: '#003366', light: '#0066CC', dark: '#001a33', contrastText: '#ffffff' },
-    secondary: { main: '#0066CC', light: '#0099FF', dark: '#004C99', contrastText: '#ffffff' },
-    background: { default: '#F5F5F5', paper: '#FFFFFF' },
-    success: { main: '#28A745', light: '#52C76A', dark: '#1E7E34', contrastText: '#fff' },
-    warning: { main: '#FFB020', light: '#FFCA66', dark: '#C68100', contrastText: '#1d2330' },
-    error: { main: '#DC3545', light: '#E35D6A', dark: '#B02A37', contrastText: '#fff' },
-    info: { main: '#0066CC', light: '#3393E6', dark: '#004C99', contrastText: '#fff' },
-    divider: '#D4D9E2',
-    text: { primary: '#333333', secondary: '#5A6475' }
+    primary: { main: '#000000', light: '#333333', dark: '#000000', contrastText: '#FFFFFF' }, // Black as primary
+    secondary: { main: '#F5F1E9', light: '#FAF7F0', dark: '#CFC7B8', contrastText: '#000000' }, // Cream tones
+    background: { default: '#FAFAFA', paper: '#FFFFFF' }, // White / off-white backgrounds
+    text: {
+      primary: '#1A1A1A', // Almost black text for readability
+      secondary: '#555555', // Medium grey for secondary text
+    },
+    divider: '#D0D0D0', // Light grey divider
+    success: { main: '#4CAF50', light: '#80E27E', dark: '#087F23', contrastText: '#fff' },
+    warning: { main: '#FFA000', light: '#FFC947', dark: '#C67100', contrastText: '#fff' },
+    error: { main: '#D32F2F', light: '#FF6659', dark: '#9A0007', contrastText: '#fff' },
+    info: { main: '#1976D2', light: '#63A4FF', dark: '#004BA0', contrastText: '#fff' },
   },
   typography: {
     fontFamily: '"Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif',
-  h1: { fontSize: '2.4rem', fontWeight: 600, color: '#003366' },
-  h2: { fontSize: '2rem', fontWeight: 600, color: '#003366' },
-  h3: { fontSize: '1.75rem', fontWeight: 600, color: '#003366' },
-  h4: { fontSize: '1.5rem', fontWeight: 600, color: '#003366' },
-  h5: { fontSize: '1.25rem', fontWeight: 600, color: '#003366' },
-  h6: { fontSize: '1rem', fontWeight: 600, color: '#003366' },
-    body1: {
-    fontSize: '1rem',
-    color: '#333333',
-    },
-    body2: {
-    fontSize: '0.875rem',
-    color: '#5A6475',
-    },
+    h1: { fontSize: '2.5rem', fontWeight: 700, color: '#000000' },
+    h2: { fontSize: '2rem', fontWeight: 600, color: '#000000' },
+    h3: { fontSize: '1.75rem', fontWeight: 600, color: '#000000' },
+    h4: { fontSize: '1.5rem', fontWeight: 600, color: '#000000' },
+    h5: { fontSize: '1.25rem', fontWeight: 600, color: '#000000' },
+    h6: { fontSize: '1rem', fontWeight: 600, color: '#000000' },
+    body1: { fontSize: '1rem', color: '#1A1A1A' },
+    body2: { fontSize: '0.875rem', color: '#555555' },
   },
   components: {
     MuiCard: {
       styleOverrides: {
         root: {
-          borderRadius: '10px',
-          boxShadow: '0 5px 15px rgba(0, 0, 0, 0.08)',
+          borderRadius: '12px',
+          boxShadow: '0 3px 10px rgba(0,0,0,0.1)',
+          backgroundColor: '#F5F1E9', // Cream background for cards
           transition: 'transform 0.3s, box-shadow 0.3s',
           '&:hover': {
-            transform: 'translateY(-2px)',
-            boxShadow: '0 8px 25px rgba(0, 0, 0, 0.12)',
+            transform: 'translateY(-4px)',
+            boxShadow: '0 10px 20px rgba(0,0,0,0.15)',
           },
         },
       },
@@ -50,12 +48,23 @@ export const bankingTheme = createTheme({
           borderRadius: '8px',
           textTransform: 'none',
           fontWeight: 600,
-          padding: '10px 20px',
+          padding: '12px 24px',
+          color: '#FFFFFF',
         },
-        contained: {
-          boxShadow: '0 4px 12px rgba(26, 35, 126, 0.3)',
+        containedPrimary: {
+          backgroundColor: '#000000',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
           '&:hover': {
-            boxShadow: '0 6px 16px rgba(26, 35, 126, 0.4)',
+            backgroundColor: '#333333',
+            boxShadow: '0 6px 16px rgba(0,0,0,0.5)',
+          },
+        },
+        outlinedSecondary: {
+          borderColor: '#F5F1E9',
+          color: '#000000',
+          '&:hover': {
+            backgroundColor: '#F5F1E9',
+            borderColor: '#CFC7B8',
           },
         },
       },
@@ -64,14 +73,17 @@ export const bankingTheme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: '16px',
-          fontWeight: 500,
+          fontWeight: 600,
+          backgroundColor: '#E0DED8', // light greyish cream
+          color: '#000000',
         },
       },
     },
     MuiPaper: {
       styleOverrides: {
         root: {
-          borderRadius: '10px',
+          borderRadius: '12px',
+          backgroundColor: '#FFFFFF',
         },
       },
     },

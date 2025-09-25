@@ -99,24 +99,71 @@ const LoginPage = () => {
   return (
     <Box sx={{
       minHeight: '100vh',
-      background: (theme) => `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
+      backgroundColor: 'primary.main', // Solid black background
       display: 'flex',
       alignItems: 'center',
-      py: 4
+      py: 6
     }}>
-      <Container maxWidth="md">
-        <Box sx={{ textAlign: 'center', mb: 4 }}>
-          <Typography variant="h3" sx={{ color: 'white', fontWeight: 'bold', mb: 1 }}>
+      <Container maxWidth="lg">
+        {/* Enhanced Header Section */}
+        <Box sx={{ textAlign: 'center', mb: 6 }}>
+          <Typography variant="h3" sx={{ 
+            color: 'white', 
+            fontWeight: 'bold', 
+            mb: 2,
+            fontSize: { xs: '2rem', md: '3rem' }
+          }}>
             OBS Banking System
           </Typography>
-          <Typography variant="h6" sx={{ color: 'rgba(255,255,255,0.8)' }}>
+          <Typography variant="h6" sx={{ 
+            color: 'rgba(255,255,255,0.8)',
+            fontSize: { xs: '1rem', md: '1.25rem' },
+            maxWidth: '500px',
+            mx: 'auto'
+          }}>
             Login to your account
           </Typography>
+          <Box sx={{ 
+            width: 80, 
+            height: 4, 
+            bgcolor: 'white', 
+            mx: 'auto',
+            borderRadius: 2,
+            mt: 3,
+            mb: 4,
+            opacity: 0.8
+          }} />
         </Box>
 
-        <Box sx={{ display: 'flex', gap: 3, alignItems: 'flex-start' }}>
-          {/* Login Form */}
-          <Paper sx={{ p: 4, flex: 1, maxWidth: 400 }}>
+        {/* Enhanced Login Container with Perfect Center Alignment */}
+        <Box sx={{ 
+          display: 'flex', 
+          justifyContent: 'center',
+          '& > *': {
+            maxWidth: { xs: '100%', md: '450px' },
+            width: '100%'
+          }
+        }}>
+          <Box sx={{ 
+            display: 'flex', 
+            gap: { xs: 0, md: 4 }, 
+            alignItems: 'flex-start',
+            flexDirection: { xs: 'column', md: 'row' },
+            justifyContent: 'center',
+            width: '100%',
+            maxWidth: '900px'
+          }}>
+          {/* Enhanced Login Form */}
+          <Paper sx={{ 
+            p: { xs: 3, md: 5 }, 
+            flex: 1, 
+            maxWidth: 450,
+            borderRadius: 4,
+            boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
+            border: '1px solid rgba(255,255,255,0.1)',
+            backgroundColor: 'rgba(255,255,255,0.98)',
+            mb: { xs: 4, md: 0 }
+          }}>
             <Typography variant="h5" sx={{ mb: 3, textAlign: 'center', fontWeight: 'bold' }}>
               Sign In
             </Typography>
@@ -184,8 +231,15 @@ const LoginPage = () => {
             </form>
           </Paper>
 
-          {/* Demo Credentials */}
-          <Card sx={{ flex: 1, maxWidth: 350 }}>
+          {/* Enhanced Demo Credentials */}
+          <Card sx={{ 
+            flex: 1, 
+            maxWidth: 400,
+            borderRadius: 4,
+            boxShadow: '0 10px 30px rgba(255,255,255,0.1)',
+            border: '1px solid rgba(255,255,255,0.2)',
+            backgroundColor: 'rgba(255,255,255,0.95)'
+          }}>
             <CardContent>
               <Typography variant="h6" sx={{ mb: 2, fontWeight: 'bold', color: 'primary.main' }}>
                 Demo Credentials
@@ -236,6 +290,7 @@ const LoginPage = () => {
               </Alert>
             </CardContent>
           </Card>
+          </Box>
         </Box>
       </Container>
     </Box>

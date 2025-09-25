@@ -113,7 +113,7 @@ const OTPVerification = ({ email, onVerify, onResend, loading }) => {
                 bottom: -2, 
                 width: '100%', 
                 height: 2, 
-                background: (theme) => `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`, 
+                backgroundColor: 'primary.main', // Solid black underline
                 transform: 'scaleX(0)', 
                 transformOrigin: 'left', 
                 transition: 'transform .4s' 

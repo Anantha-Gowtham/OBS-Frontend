@@ -23,6 +23,7 @@ import {
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Visibility, VisibilityOff, PersonAdd } from '@mui/icons-material';
 import { useAuth } from '../../contexts/AuthContext';
+import WelcomeAnimation from '../../components/WelcomeAnimation';
 
 const initialForm = {
   firstName: '',
@@ -62,6 +63,8 @@ const Register = () => {
   const [createdCard, setCreatedCard] = useState(null);
   const [passwordScore, setPasswordScore] = useState(0);
   const [activeStep, setActiveStep] = useState(0);
+  const [showWelcomeAnimation, setShowWelcomeAnimation] = useState(false);
+  const [newUserData, setNewUserData] = useState(null);
 
   const stepOrder = [
     'Personal Info',
@@ -197,12 +200,48 @@ const Register = () => {
       
       const resp = await register(payload);
       if (resp.success) {
-        setSuccess(resp.message || 'Registration successful! Redirecting to login...');
+        console.log('Registration response:', resp);
+        setSuccess(resp.message || 'Registration successful!');
         setCreatedAccount(resp.account || null);
         setCreatedCard(resp.card || null);
+        
+        // Create default card after successful registration
+        try {
+          const defaultCardData = {
+            userId: resp.user?.id,
+            accountNumber: resp.account?.accountNumber,
+            initialDeposit: form.initialDeposit || 0
+          };
+          
+          const cardResponse = await apiService.createDefaultCard(defaultCardData);
+          console.log('Default card created:', cardResponse);
+          
+          if (cardResponse.success) {
+            setCreatedCard(cardResponse.card);
+          }
+        } catch (cardError) {
+          console.log('Failed to create default card:', cardError);
+          // Don't fail the registration if card creation fails
+        }
+        
+        // Set user data first
+        const userData = {
+          username: form.username.trim(),
+          firstName: form.firstName.trim(),
+          lastName: form.lastName.trim()
+        };
+        console.log('Setting user data for animation:', userData);
+        setNewUserData(userData);
+        
         setForm(initialForm);
         
-        setTimeout(() => navigate('/login'), 4000);
+        // Show welcome animation
+        console.log('Registration successful, showing welcome animation...');
+        
+        setTimeout(() => {
+          console.log('Triggering welcome animation...');
+          setShowWelcomeAnimation(true);
+        }, 1000);
       } else {
         setError(resp.message || 'Registration failed');
       }
@@ -602,6 +641,17 @@ const Register = () => {
           </CardContent>
         </Card>
       </Box>
+      
+      {/* Welcome Animation */}
+      {showWelcomeAnimation && newUserData && (
+        <WelcomeAnimation 
+          username={`${newUserData.firstName} ${newUserData.lastName}`}
+          onComplete={() => {
+            setShowWelcomeAnimation(false);
+            navigate('/login');
+          }}
+        />
+      )}
     </Container>
   );
 };

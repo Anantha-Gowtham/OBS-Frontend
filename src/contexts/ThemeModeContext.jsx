@@ -46,29 +46,108 @@ export const ThemeModeProvider = ({ children }) => {
   const theme = useMemo(() => createTheme({
     palette: mode === 'light' ? {
       mode: 'light',
-      primary: { main: '#1C2A52', light: '#243665', dark: '#121B38', contrastText: '#ffffff' },
-      secondary: { main: '#FFD700', light: '#FFE077', dark: '#C7A600', contrastText: '#121B38' },
-      success: { main: '#3C9D72', dark: '#277051', light: '#60B78E', contrastText: '#ffffff' },
-      error: { main: '#DC3545', dark: '#A62633', light: '#E35D6A', contrastText: '#ffffff' },
-      warning: { main: '#FFB84D', dark: '#C88724', light: '#FFCE80', contrastText: '#121B38' },
-      info: { main: '#3C9D72', dark: '#277051', light: '#60B78E', contrastText: '#ffffff' },
-      background: { default: '#F4F6F9', paper: '#FFFFFF' },
-      divider: '#D3D8E2',
-      text: { primary: '#1F2532', secondary: '#5A6475' }
+      primary: { main: '#000000', light: '#333333', dark: '#000000', contrastText: '#FFFFFF' }, // Black as primary
+      secondary: { main: '#F5F1E9', light: '#FAF7F0', dark: '#CFC7B8', contrastText: '#000000' }, // Cream tones
+      background: { default: '#FAFAFA', paper: '#FFFFFF' }, // White / off-white backgrounds
+      text: {
+        primary: '#1A1A1A', // Almost black text for readability
+        secondary: '#555555', // Medium grey for secondary text
+      },
+      divider: '#D0D0D0', // Light grey divider
+      success: { main: '#4CAF50', light: '#80E27E', dark: '#087F23', contrastText: '#fff' },
+      warning: { main: '#FFA000', light: '#FFC947', dark: '#C67100', contrastText: '#fff' },
+      error: { main: '#D32F2F', light: '#FF6659', dark: '#9A0007', contrastText: '#fff' },
+      info: { main: '#1976D2', light: '#63A4FF', dark: '#004BA0', contrastText: '#fff' },
     } : {
       mode: 'dark',
-      primary: { main: '#121B38', light: '#1C2A52', dark: '#0A1020', contrastText: '#EAEAEA' },
-      secondary: { main: '#FFD700', light: '#FFE077', dark: '#C7A600', contrastText: '#121B38' },
-      success: { main: '#FFB84D', dark: '#C88724', light: '#FFCE80', contrastText: '#121B38' },
-      error: { main: '#DC3545', dark: '#A62633', light: '#FF5C6B', contrastText: '#EAEAEA' },
-      warning: { main: '#FFB84D', dark: '#C88724', light: '#FFCE80', contrastText: '#121B38' },
-      info: { main: '#3C9D72', dark: '#277051', light: '#60B78E', contrastText: '#EAEAEA' },
-      background: { default: '#2C2C2C', paper: '#1A2235' },
-      divider: '#38445C',
-      text: { primary: '#EAEAEA', secondary: '#B5BCC9' }
+      primary: { main: '#FFFFFF', light: '#CCCCCC', dark: '#FFFFFF', contrastText: '#000000' }, // White as primary in dark mode
+      secondary: { main: '#2A2A2A', light: '#404040', dark: '#1A1A1A', contrastText: '#FFFFFF' }, // Dark tones for dark mode
+      background: { default: '#121212', paper: '#1E1E1E' }, // Dark backgrounds
+      text: {
+        primary: '#FFFFFF', // White text for dark mode
+        secondary: '#AAAAAA', // Light grey for secondary text
+      },
+      divider: '#444444', // Dark grey divider
+      success: { main: '#4CAF50', light: '#80E27E', dark: '#087F23', contrastText: '#fff' },
+      warning: { main: '#FFA000', light: '#FFC947', dark: '#C67100', contrastText: '#000' },
+      error: { main: '#F44336', light: '#FF6659', dark: '#D32F2F', contrastText: '#fff' },
+      info: { main: '#2196F3', light: '#63A4FF', dark: '#1976D2', contrastText: '#fff' },
     },
     ...commonTokens,
-    typography: { ...commonTokens.typography, h1: { fontSize: '2.25rem', fontWeight: 600 }, h2: { fontSize: '1.9rem', fontWeight: 600 } }
+    typography: { 
+      ...commonTokens.typography, 
+      fontFamily: '"Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif',
+      h1: { fontSize: '2.5rem', fontWeight: 700, color: mode === 'light' ? '#000000' : '#FFFFFF' },
+      h2: { fontSize: '2rem', fontWeight: 600, color: mode === 'light' ? '#000000' : '#FFFFFF' },
+      h3: { fontSize: '1.75rem', fontWeight: 600, color: mode === 'light' ? '#000000' : '#FFFFFF' },
+      h4: { fontSize: '1.5rem', fontWeight: 600, color: mode === 'light' ? '#000000' : '#FFFFFF' },
+      h5: { fontSize: '1.25rem', fontWeight: 600, color: mode === 'light' ? '#000000' : '#FFFFFF' },
+      h6: { fontSize: '1rem', fontWeight: 600, color: mode === 'light' ? '#000000' : '#FFFFFF' },
+      body1: { fontSize: '1rem', color: mode === 'light' ? '#1A1A1A' : '#FFFFFF' },
+      body2: { fontSize: '0.875rem', color: mode === 'light' ? '#555555' : '#AAAAAA' },
+    },
+    components: {
+      ...commonTokens.components,
+      MuiCard: {
+        styleOverrides: {
+          root: {
+            borderRadius: '12px',
+            boxShadow: mode === 'light' ? '0 3px 10px rgba(0,0,0,0.1)' : '0 3px 10px rgba(0,0,0,0.3)',
+            backgroundColor: mode === 'light' ? '#F5F1E9' : '#1E1E1E', // Cream background for cards in light mode
+            transition: 'transform 0.3s, box-shadow 0.3s',
+            '&:hover': {
+              transform: 'translateY(-4px)',
+              boxShadow: mode === 'light' ? '0 10px 20px rgba(0,0,0,0.15)' : '0 10px 20px rgba(0,0,0,0.4)',
+            },
+          },
+        },
+      },
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            borderRadius: '8px',
+            textTransform: 'none',
+            fontWeight: 600,
+            padding: '12px 24px',
+          },
+          containedPrimary: {
+            backgroundColor: mode === 'light' ? '#000000' : '#FFFFFF',
+            color: mode === 'light' ? '#FFFFFF' : '#000000',
+            boxShadow: mode === 'light' ? '0 4px 12px rgba(0,0,0,0.4)' : '0 4px 12px rgba(255,255,255,0.4)',
+            '&:hover': {
+              backgroundColor: mode === 'light' ? '#333333' : '#CCCCCC',
+              boxShadow: mode === 'light' ? '0 6px 16px rgba(0,0,0,0.5)' : '0 6px 16px rgba(255,255,255,0.5)',
+            },
+          },
+          outlinedSecondary: {
+            borderColor: mode === 'light' ? '#F5F1E9' : '#404040',
+            color: mode === 'light' ? '#000000' : '#FFFFFF',
+            '&:hover': {
+              backgroundColor: mode === 'light' ? '#F5F1E9' : '#404040',
+              borderColor: mode === 'light' ? '#CFC7B8' : '#606060',
+            },
+          },
+        },
+      },
+      MuiChip: {
+        styleOverrides: {
+          root: {
+            borderRadius: '16px',
+            fontWeight: 600,
+            backgroundColor: mode === 'light' ? '#E0DED8' : '#404040', // light greyish cream / dark grey
+            color: mode === 'light' ? '#000000' : '#FFFFFF',
+          },
+        },
+      },
+      MuiPaper: {
+        styleOverrides: {
+          root: {
+            borderRadius: '12px',
+            backgroundColor: mode === 'light' ? '#FFFFFF' : '#1E1E1E',
+          },
+        },
+      },
+    }
   }), [mode]);
 
   const value = useMemo(() => ({ mode, toggleMode }), [mode]);

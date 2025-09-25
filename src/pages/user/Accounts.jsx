@@ -318,7 +318,7 @@ const UserAccounts = () => {
       {/* Account Summary Cards */}
       <Grid container spacing={3} sx={{ mb: 4 }}>
         <Grid size={{ xs: 12, md: 4 }}>
-          <Card sx={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: 'white' }}>
+          <Card sx={{ backgroundColor: 'primary.main', color: 'white' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <Box>
@@ -631,7 +631,7 @@ const UserAccounts = () => {
                   </Box>
                   
                   <Box sx={{ 
-                    background: 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)',
+                    backgroundColor: 'primary.main', // Solid black background
                     color: 'white',
                     p: 3,
                     borderRadius: 2,

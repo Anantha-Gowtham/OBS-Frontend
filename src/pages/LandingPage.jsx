@@ -143,7 +143,7 @@ const LandingPage = () => {
   return (
     <Box sx={{ 
       minHeight: '100vh',
-      background: (theme) => `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
+      backgroundColor: 'primary.main', // Solid black background
       color: 'white'
     }}>
       {/* Header */}
@@ -168,7 +168,7 @@ const LandingPage = () => {
               borderColor: 'white',
               '&:hover': {
                 borderColor: 'white',
-                backgroundColor: 'rgba(255,255,255,0.1)'
+                backgroundColor: 'rgba(247, 247, 247, 0.98)'
               }
             }}
             onClick={() => navigate('/login')}
@@ -198,14 +198,16 @@ const LandingPage = () => {
             <Typography variant="h2" sx={{ 
               fontWeight: 'bold', 
               mb: 3,
-              fontSize: { xs: '2.5rem', md: '3.5rem' }
+              fontSize: { xs: '2.5rem', md: '3.5rem' },
+              color: 'white' // Explicit white color
             }}>
               OBS Banking Services
             </Typography>
             <Typography variant="h6" sx={{ 
               mb: 4, 
               opacity: 0.9,
-              lineHeight: 1.6
+              lineHeight: 1.6,
+              color: 'white' // Explicit white color
             }}>
               Comprehensive banking solutions designed to meet all your financial needs. 
               From basic accounts to advanced investment products, experience secure and 
@@ -282,105 +284,225 @@ const LandingPage = () => {
         </Grid>
       </Container>
 
-      {/* Quick Services Section */}
-      <Container maxWidth="lg" sx={{ py: 8 }}>
-        <Typography variant="h3" sx={{ 
-          textAlign: 'center', 
-          mb: 2,
-          fontWeight: 'bold',
-          color: 'white'
-        }}>
-          Quick Banking Services
-        </Typography>
-        <Typography variant="h6" sx={{ 
-          textAlign: 'center', 
-          mb: 6, 
-          opacity: 0.9,
-          color: 'white'
-        }}>
-          Access your most-used banking services instantly
-        </Typography>
-        
-        <Grid container spacing={3}>
-          {quickServices.map((service, index) => (
-            <Grid size={{ xs: 6, sm: 4, md: 3 }} key={index} data-reveal={`delay-${(index % 5) + 1}`}>
-              <Card sx={{ 
-                height: '100%',
-                backgroundColor: 'rgba(255,255,255,0.95)',
-                cursor: 'pointer',
-                transition: 'all 0.3s ease',
-                '&:hover': {
-                  transform: 'translateY(-5px)',
-                  boxShadow: 6
-                }
-              }}
-              onClick={() => navigate('/login')}
-              >
-                <CardContent sx={{ textAlign: 'center', p: 2 }}>
-                  <Box sx={{ 
-                    color: 'primary.main', 
-                    mb: 1,
-                    '& svg': { fontSize: 32 }
-                  }}>
-                    {service.icon}
-                  </Box>
-                  <Typography variant="subtitle2" sx={{ 
-                    fontWeight: 'bold', 
-                    mb: 0.5,
-                    fontSize: '0.9rem'
-                  }}>
-                    {service.title}
-                  </Typography>
-                  <Typography variant="caption" sx={{ 
-                    color: 'text.secondary',
-                    fontSize: '0.75rem'
-                  }}>
-                    {service.desc}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-
-      {/* Investment Products Section */}
-      <Box sx={{ 
-        backgroundColor: 'rgba(255,255,255,0.1)', 
-        py: 8 
-      }}>
-        <Container maxWidth="lg">
+      {/* Quick Services Section - Enhanced Center Alignment */}
+      <Container maxWidth="lg" sx={{ py: 10 }}>
+        <Box sx={{ textAlign: 'center', mb: 8 }}>
           <Typography variant="h3" sx={{ 
-            textAlign: 'center', 
-            mb: 2,
             fontWeight: 'bold',
-            color: 'white'
+            mb: 3,
+            color: 'white',
+            fontSize: { xs: '2rem', md: '2.5rem' }
           }}>
-            Investment & Savings Products
+            Quick Banking Services
           </Typography>
           <Typography variant="h6" sx={{ 
-            textAlign: 'center', 
-            mb: 6, 
+            mb: 2, 
             opacity: 0.9,
-            color: 'white'
+            color: 'white',
+            maxWidth: '600px',
+            mx: 'auto',
+            fontSize: { xs: '1rem', md: '1.2rem' },
+            lineHeight: 1.6
           }}>
-            Grow your wealth with our competitive investment options
+            Access your most-used banking services instantly
           </Typography>
+          <Box sx={{ 
+            width: 80, 
+            height: 4, 
+            bgcolor: 'white', 
+            mx: 'auto',
+            borderRadius: 2,
+            mb: 6,
+            opacity: 0.8
+          }} />
+        </Box>
+        
+        {/* Enhanced Services Grid with Perfect Center Alignment */}
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Box sx={{ maxWidth: '1200px', width: '100%' }}>
+            <Grid 
+              container 
+              spacing={{ xs: 3, md: 4 }} 
+              justifyContent="center"
+              alignItems="stretch"
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                justifyContent: 'center',
+                '& > .MuiGrid-item': {
+                  display: 'flex',
+                  justifyContent: 'center'
+                }
+              }}
+            >
+              {quickServices.map((service, index) => (
+                <Grid 
+                  size={{ xs: 12, sm: 6, md: 4, lg: 3 }} 
+                  key={index} 
+                  data-reveal={`delay-${(index % 5) + 1}`}
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    maxWidth: { 
+                      xs: '100%', 
+                      sm: '280px', 
+                      md: '250px',
+                      lg: '280px' 
+                    },
+                    width: '100%'
+                  }}
+                >
+                  <Card sx={{ 
+                    height: '100%',
+                    width: '100%',
+                    maxWidth: '250px',
+                    backgroundColor: 'rgba(255,255,255,0.98)',
+                    cursor: 'pointer',
+                    borderRadius: 4,
+                    border: '2px solid transparent',
+                    transition: 'all 0.4s ease',
+                    boxShadow: '0 4px 20px rgba(255,255,255,0.1)',
+                    mx: 'auto',
+                    '&:hover': {
+                      transform: 'translateY(-12px)',
+                      boxShadow: '0 25px 50px rgba(255,255,255,0.2)',
+                      border: '2px solid rgba(255,255,255,0.8)',
+                      backgroundColor: 'rgba(255,255,255,1)'
+                    }
+                  }}
+                  onClick={() => navigate('/login')}
+                  >
+                    <CardContent sx={{ textAlign: 'center', p: { xs: 3, md: 4 } }}>
+                      <Box sx={{ 
+                        color: 'primary.main', 
+                        mb: 2,
+                        '& svg': { 
+                          fontSize: { xs: 36, md: 40 },
+                          transition: 'all 0.3s ease'
+                        },
+                        '&:hover svg': {
+                          transform: 'scale(1.1)'
+                        }
+                      }}>
+                        {service.icon}
+                      </Box>
+                      <Typography variant="subtitle1" sx={{ 
+                        fontWeight: 'bold', 
+                        mb: 1,
+                        fontSize: { xs: '0.95rem', md: '1.1rem' },
+                        color: '#000'
+                      }}>
+                        {service.title}
+                      </Typography>
+                      <Typography variant="body2" sx={{ 
+                        color: 'text.secondary',
+                        fontSize: { xs: '0.85rem', md: '0.9rem' },
+                        lineHeight: 1.5
+                      }}>
+                        {service.desc}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+        </Box>
+      </Container>
+
+      {/* Investment Products Section - Enhanced Center Alignment */}
+      <Box sx={{ 
+        backgroundColor: 'rgba(255,255,255,0.1)', 
+        py: 10 
+      }}>
+        <Container maxWidth="lg">
+          <Box sx={{ textAlign: 'center', mb: 8 }}>
+            <Typography variant="h3" sx={{ 
+              fontWeight: 'bold',
+              mb: 3,
+              color: 'white',
+              fontSize: { xs: '2rem', md: '2.5rem' }
+            }}>
+              Investment & Savings Products
+            </Typography>
+            <Typography variant="h6" sx={{ 
+              mb: 2, 
+              opacity: 0.9,
+              color: 'white',
+              maxWidth: '700px',
+              mx: 'auto',
+              fontSize: { xs: '1rem', md: '1.2rem' },
+              lineHeight: 1.6
+            }}>
+              Grow your wealth with our competitive investment options
+            </Typography>
+            <Box sx={{ 
+              width: 80, 
+              height: 4, 
+              bgcolor: 'white', 
+              mx: 'auto',
+              borderRadius: 2,
+              mb: 6,
+              opacity: 0.8
+            }} />
+          </Box>
           
-          <Grid container spacing={4}>
-            {investmentProducts.map((product, index) => (
-              <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index} data-reveal={`delay-${(index % 5) + 1}`}>
-                <Card sx={{ 
-                  height: '100%',
-                  backgroundColor: 'rgba(255,255,255,0.95)',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease',
-                  '&:hover': {
-                    transform: 'translateY(-5px)',
-                    boxShadow: 6
+          {/* Enhanced Investment Cards Grid */}
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <Box sx={{ maxWidth: '1200px', width: '100%' }}>
+              <Grid 
+                container 
+                spacing={{ xs: 3, md: 4 }} 
+                justifyContent="center"
+                alignItems="stretch"
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  flexWrap: 'wrap',
+                  justifyContent: 'center',
+                  '& > .MuiGrid-item': {
+                    display: 'flex',
+                    justifyContent: 'center'
                   }
                 }}
-                onClick={() => navigate('/register')}
+              >
+                {investmentProducts.map((product, index) => (
+                  <Grid 
+                    size={{ xs: 12, sm: 6, md: 6, lg: 3 }} 
+                    key={index} 
+                    data-reveal={`delay-${(index % 5) + 1}`}
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      maxWidth: { 
+                        xs: '100%', 
+                        sm: '350px', 
+                        md: '300px',
+                        lg: '280px' 
+                      },
+                      width: '100%'
+                    }}
+                  >
+                    <Card sx={{ 
+                      height: '100%',
+                      width: '100%',
+                      maxWidth: '280px',
+                      backgroundColor: 'rgba(255,255,255,0.98)',
+                      cursor: 'pointer',
+                      borderRadius: 4,
+                      border: '2px solid transparent',
+                      transition: 'all 0.4s ease',
+                      boxShadow: '0 4px 20px rgba(255,255,255,0.1)',
+                      mx: 'auto',
+                      '&:hover': {
+                        transform: 'translateY(-12px)',
+                        boxShadow: '0 25px 50px rgba(255,255,255,0.2)',
+                        border: '2px solid rgba(255,255,255,0.8)',
+                        backgroundColor: 'rgba(255,255,255,1)'
+                      }
+                    }}
+                    onClick={() => navigate('/register')}
                 >
                   <CardContent sx={{ textAlign: 'center', p: 3 }}>
                     <Box sx={{ mb: 2 }}>
@@ -413,75 +535,143 @@ const LandingPage = () => {
               </Grid>
             ))}
           </Grid>
+          </Box>
+        </Box>
         </Container>
       </Box>
 
-      {/* Loan Categories Section */}
-      <Container maxWidth="lg" sx={{ py: 8 }}>
-        <Typography variant="h3" sx={{ 
-          textAlign: 'center', 
-          mb: 2,
-          fontWeight: 'bold',
-          color: 'white'
-        }}>
-          Loan Solutions
-        </Typography>
-        <Typography variant="h6" sx={{ 
-          textAlign: 'center', 
-          mb: 6, 
-          opacity: 0.9,
-          color: 'white'
-        }}>
-          Competitive rates with quick approval process
-        </Typography>
+      {/* Loan Categories Section - Enhanced Center Alignment */}
+      <Container maxWidth="lg" sx={{ py: 10 }}>
+        <Box sx={{ textAlign: 'center', mb: 8 }}>
+          <Typography variant="h3" sx={{ 
+            fontWeight: 'bold',
+            mb: 3,
+            color: 'white',
+            fontSize: { xs: '2rem', md: '2.5rem' }
+          }}>
+            Loan Solutions
+          </Typography>
+          <Typography variant="h6" sx={{ 
+            mb: 2, 
+            opacity: 0.9,
+            color: 'white',
+            maxWidth: '600px',
+            mx: 'auto',
+            fontSize: { xs: '1rem', md: '1.2rem' },
+            lineHeight: 1.6
+          }}>
+            Competitive rates with quick approval process
+          </Typography>
+          <Box sx={{ 
+            width: 80, 
+            height: 4, 
+            bgcolor: 'white', 
+            mx: 'auto',
+            borderRadius: 2,
+            mb: 6,
+            opacity: 0.8
+          }} />
+        </Box>
         
-        <Grid container spacing={4}>
-          {loanCategories.map((loan, index) => (
-            <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
-              <Card sx={{ 
-                height: '100%',
-                backgroundColor: 'rgba(255,255,255,0.95)',
-                cursor: 'pointer',
-                transition: 'all 0.3s ease',
-                '&:hover': {
-                  transform: 'translateY(-5px)',
-                  boxShadow: 6
+        {/* Enhanced Loan Cards Grid */}
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Box sx={{ maxWidth: '1200px', width: '100%' }}>
+            <Grid 
+              container 
+              spacing={{ xs: 3, md: 4 }} 
+              justifyContent="center"
+              alignItems="stretch"
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                justifyContent: 'center',
+                '& > .MuiGrid-item': {
+                  display: 'flex',
+                  justifyContent: 'center'
                 }
               }}
-              onClick={() => navigate('/register')}
-              >
-                <CardContent sx={{ textAlign: 'center', p: 3 }}>
-                  <Box sx={{ 
-                    color: 'primary.main', 
-                    mb: 2,
-                    '& svg': { fontSize: 40 }
-                  }}>
-                    {loan.icon}
-                  </Box>
-                  <Typography variant="h6" sx={{ 
-                    fontWeight: 'bold', 
-                    mb: 1 
-                  }}>
-                    {loan.title}
-                  </Typography>
-                  <Typography variant="body2" sx={{ 
-                    color: 'success.main',
-                    fontWeight: 'bold',
-                    mb: 1
-                  }}>
-                    Starting at {loan.rate} p.a.
-                  </Typography>
-                  <Typography variant="body2" sx={{ 
-                    color: 'text.secondary'
-                  }}>
-                    {loan.amount}
-                  </Typography>
-                </CardContent>
-              </Card>
+            >
+              {loanCategories.map((loan, index) => (
+                <Grid 
+                  size={{ xs: 12, sm: 6, md: 6, lg: 3 }} 
+                  key={index}
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    maxWidth: { 
+                      xs: '100%', 
+                      sm: '350px', 
+                      md: '300px',
+                      lg: '280px' 
+                    },
+                    width: '100%'
+                  }}
+                >
+                  <Card sx={{ 
+                    height: '100%',
+                    width: '100%',
+                    maxWidth: '280px',
+                    backgroundColor: 'rgba(255,255,255,0.98)',
+                    cursor: 'pointer',
+                    borderRadius: 4,
+                    border: '2px solid transparent',
+                    transition: 'all 0.4s ease',
+                    boxShadow: '0 4px 20px rgba(255,255,255,0.1)',
+                    mx: 'auto',
+                    '&:hover': {
+                      transform: 'translateY(-12px)',
+                      boxShadow: '0 25px 50px rgba(255,255,255,0.2)',
+                      border: '2px solid rgba(255,255,255,0.8)',
+                      backgroundColor: 'rgba(255,255,255,1)'
+                    }
+                  }}
+                  onClick={() => navigate('/register')}
+                  >
+                    <CardContent sx={{ textAlign: 'center', p: { xs: 3, md: 4 } }}>
+                      <Box sx={{ 
+                        color: 'primary.main', 
+                        mb: 3,
+                        '& svg': { 
+                          fontSize: { xs: 36, md: 44 },
+                          transition: 'all 0.3s ease'
+                        },
+                        '&:hover svg': {
+                          transform: 'scale(1.1)'
+                        }
+                      }}>
+                        {loan.icon}
+                      </Box>
+                      <Typography variant="h6" sx={{ 
+                        fontWeight: 'bold', 
+                        mb: 2,
+                        fontSize: { xs: '1.1rem', md: '1.25rem' },
+                        color: '#000'
+                      }}>
+                        {loan.title}
+                      </Typography>
+                      <Typography variant="body1" sx={{ 
+                        color: 'success.main',
+                        fontWeight: 'bold',
+                        mb: 2,
+                        fontSize: { xs: '0.9rem', md: '1rem' }
+                      }}>
+                        Starting at {loan.rate} p.a.
+                      </Typography>
+                      <Typography variant="body2" sx={{ 
+                        color: 'text.secondary',
+                        fontSize: { xs: '0.85rem', md: '0.9rem' }
+                      }}>
+                        {loan.amount}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid>
-      </Container>
+            </Box>
+          </Box>
+        </Container>
 
       {/* Bill Payment Categories */}
       <Box sx={{ 
@@ -815,60 +1005,131 @@ const LandingPage = () => {
         </Box>
       </Container>
 
-      {/* Features Section */}
+      {/* Features Section - Enhanced Center Alignment */}
       <Box sx={{ 
         backgroundColor: 'rgba(255,255,255,0.1)', 
-        py: 8 
+        py: 10 
       }}>
         <Container maxWidth="lg">
-          <Typography variant="h3" sx={{ 
-            textAlign: 'center', 
-            mb: 2,
-            fontWeight: 'bold'
-          }}>
-            Why Choose OBS Banking?
-          </Typography>
-          <Typography variant="h6" sx={{ 
-            textAlign: 'center', 
-            mb: 6, 
-            opacity: 0.9 
-          }}>
-            Discover the features that make us the preferred choice for modern banking
-          </Typography>
+          <Box sx={{ textAlign: 'center', mb: 8 }}>
+            <Typography variant="h3" sx={{ 
+              fontWeight: 'bold',
+              mb: 3,
+              color: 'white',
+              fontSize: { xs: '2rem', md: '2.5rem' }
+            }}>
+              Why Choose OBS Banking?
+            </Typography>
+            <Typography variant="h6" sx={{ 
+              mb: 2, 
+              opacity: 0.9,
+              color: 'white',
+              maxWidth: '700px',
+              mx: 'auto',
+              fontSize: { xs: '1rem', md: '1.2rem' },
+              lineHeight: 1.6
+            }}>
+              Discover the features that make us the preferred choice for modern banking
+            </Typography>
+            <Box sx={{ 
+              width: 80, 
+              height: 4, 
+              bgcolor: 'white', 
+              mx: 'auto',
+              borderRadius: 2,
+              mb: 6,
+              opacity: 0.8
+            }} />
+          </Box>
           
-          <Grid container spacing={4}>
-            {features.map((feature, index) => (
-              <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
-                <Card sx={{ 
-                  height: '100%',
-                  backgroundColor: 'rgba(255,255,255,0.95)',
-                  color: 'text.primary',
-                  transition: 'transform 0.3s ease',
-                  '&:hover': {
-                    transform: 'translateY(-5px)'
+          {/* Enhanced Features Grid */}
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <Box sx={{ maxWidth: '1200px', width: '100%' }}>
+              <Grid 
+                container 
+                spacing={{ xs: 3, md: 4 }} 
+                justifyContent="center"
+                alignItems="stretch"
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  flexWrap: 'wrap',
+                  justifyContent: 'center',
+                  '& > .MuiGrid-item': {
+                    display: 'flex',
+                    justifyContent: 'center'
                   }
-                }}>
-                  <CardContent sx={{ textAlign: 'center', p: 3 }}>
-                    <Box sx={{ mb: 2 }}>
-                      {feature.icon}
-                    </Box>
-                    <Typography variant="h6" sx={{ 
-                      fontWeight: 'bold', 
-                      mb: 2 
+                }}
+              >
+                {features.map((feature, index) => (
+                  <Grid 
+                    size={{ xs: 12, sm: 6, md: 6, lg: 3 }} 
+                    key={index}
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      maxWidth: { 
+                        xs: '100%', 
+                        sm: '350px', 
+                        md: '300px',
+                        lg: '280px' 
+                      },
+                      width: '100%'
+                    }}
+                  >
+                    <Card sx={{ 
+                      height: '100%',
+                      width: '100%',
+                      maxWidth: '280px',
+                      backgroundColor: 'rgba(255,255,255,0.98)',
+                      color: 'text.primary',
+                      borderRadius: 4,
+                      border: '2px solid transparent',
+                      transition: 'all 0.4s ease',
+                      boxShadow: '0 4px 20px rgba(255,255,255,0.1)',
+                      mx: 'auto',
+                      '&:hover': {
+                        transform: 'translateY(-12px)',
+                        boxShadow: '0 25px 50px rgba(255,255,255,0.2)',
+                        border: '2px solid rgba(255,255,255,0.8)',
+                        backgroundColor: 'rgba(255,255,255,1)'
+                      }
                     }}>
-                      {feature.title}
-                    </Typography>
-                    <Typography variant="body2" sx={{ 
-                      color: 'text.secondary',
-                      lineHeight: 1.6
-                    }}>
-                      {feature.description}
-                    </Typography>
-                  </CardContent>
-                </Card>
+                      <CardContent sx={{ textAlign: 'center', p: { xs: 3, md: 4 } }}>
+                        <Box sx={{ 
+                          mb: 3,
+                          '& svg': {
+                            fontSize: { xs: 36, md: 44 },
+                            transition: 'all 0.3s ease'
+                          },
+                          '&:hover svg': {
+                            transform: 'scale(1.1)'
+                          }
+                        }}>
+                          {feature.icon}
+                        </Box>
+                        <Typography variant="h6" sx={{ 
+                          fontWeight: 'bold', 
+                          mb: 2,
+                          fontSize: { xs: '1.1rem', md: '1.25rem' },
+                          color: '#000'
+                        }}>
+                          {feature.title}
+                        </Typography>
+                        <Typography variant="body2" sx={{ 
+                          color: 'text.secondary',
+                          lineHeight: 1.7,
+                          fontSize: { xs: '0.85rem', md: '0.9rem' }
+                        }}>
+                          {feature.description}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                ))}
               </Grid>
-            ))}
-          </Grid>
+            </Box>
+          </Box>
         </Container>
       </Box>
 

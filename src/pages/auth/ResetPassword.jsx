@@ -210,7 +210,7 @@ const ResetPassword = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+        backgroundColor: 'primary.main' // Solid black background
       }}>
         <Card sx={{ maxWidth: 400, width: '100%', m: 2 }}>
           <CardContent sx={{ p: 4, textAlign: 'center' }}>
@@ -232,7 +232,7 @@ const ResetPassword = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+        backgroundColor: 'primary.main' // Solid black background
       }}>
         <Card sx={{ maxWidth: 500, width: '100%', m: 2 }}>
           <CardContent sx={{ p: 4, textAlign: 'center' }}>
@@ -270,7 +270,7 @@ const ResetPassword = () => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      backgroundColor: 'primary.main', // Solid black background
       p: 2
     }}>
       <Card sx={{ maxWidth: 500, width: '100%', boxShadow: 3 }}>

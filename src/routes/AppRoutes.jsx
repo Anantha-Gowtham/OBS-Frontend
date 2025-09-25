@@ -50,6 +50,7 @@ import UserAccounts from '../pages/user/Accounts';
 import TransferMoney from '../pages/user/TransferMoney';
 import ApplyLoan from '../pages/user/ApplyLoan';
 import UserProfile from '../pages/user/Profile';
+import CardManagement from '../components/CardManagement';
 
 // Protected Route Component
 const ProtectedRoute = ({ children, requiredRole, allowedRoles }) => {
@@ -207,6 +208,7 @@ const AppRoutes = () => {
       }>
         <Route path="dashboard" element={<UserDashboard />} />
         <Route path="accounts" element={<UserAccounts />} />
+        <Route path="cards" element={<CardManagement />} />
         <Route path="transfer" element={<TransferMoney />} />
         <Route path="loans" element={<ApplyLoan />} />
         <Route path="profile" element={<UserProfile />} />

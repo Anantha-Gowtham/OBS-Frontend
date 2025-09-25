@@ -81,22 +81,91 @@ const UserProfile = () => {
     marketingEmails: false
   });
 
-  // Mock user data - in real app, this would come from API
+  // Load user data from API or use mock data as fallback
   useEffect(() => {
-    if (user) {
-      setProfileData({
-        firstName: user.firstName || 'John',
-        lastName: user.lastName || 'Doe',
-        email: user.email || 'john.doe@example.com',
-        phone: user.phone || '+91 9876543210',
-        address: '123 Banking Street, Financial District',
-        city: 'Mumbai',
-        state: 'Maharashtra',
-        pincode: '400001',
-        dateOfBirth: '1990-01-15'
-      });
-    }
-  }, [user]);
+    const loadUserProfile = async () => {
+      if (user) {
+        try {
+          let response;
+          if (isDemoMode) {
+            // Use mock data in demo mode
+            setProfileData({
+              firstName: user.firstName || 'John',
+              lastName: user.lastName || 'Doe',
+              email: user.email || 'john.doe@example.com',
+              phone: user.phone || '+91 9876543210',
+              address: '123 Banking Street, Financial District',
+              city: 'Mumbai',
+              state: 'Maharashtra',
+              pincode: '400001',
+              dateOfBirth: '1990-01-15'
+            });
+          } else {
+            // Try to fetch real user data from API
+            try {
+              response = await apiService.getUserProfile();
+              if (response.success && response.data) {
+                setProfileData({
+                  firstName: response.data.firstName || user.firstName || '',
+                  lastName: response.data.lastName || user.lastName || '',
+                  email: response.data.email || user.email || '',
+                  phone: response.data.phoneNumber || response.data.phone || '',
+                  address: response.data.addressLine1 || '',
+                  city: response.data.city || '',
+                  state: response.data.state || '',
+                  pincode: response.data.pincode || '',
+                  dateOfBirth: response.data.dateOfBirth || ''
+                });
+              } else {
+                // Fallback to user context data
+                setProfileData({
+                  firstName: user.firstName || '',
+                  lastName: user.lastName || '',
+                  email: user.email || '',
+                  phone: user.phoneNumber || '',
+                  address: user.addressLine1 || '',
+                  city: user.city || '',
+                  state: user.state || '',
+                  pincode: user.pincode || '',
+                  dateOfBirth: user.dateOfBirth || ''
+                });
+              }
+            } catch (apiError) {
+              console.log('Failed to load profile from API, using context data:', apiError);
+              // Fallback to user context data
+              setProfileData({
+                firstName: user.firstName || '',
+                lastName: user.lastName || '',
+                email: user.email || '',
+                phone: user.phoneNumber || '',
+                address: user.addressLine1 || '',
+                city: user.city || '',
+                state: user.state || '',
+                pincode: user.pincode || '',
+                dateOfBirth: user.dateOfBirth || ''
+              });
+            }
+          }
+        } catch (error) {
+          console.error('Error loading user profile:', error);
+          // Use minimal fallback data
+          setProfileData({
+            firstName: user.firstName || '',
+            lastName: user.lastName || '',
+            email: user.email || '',
+            phone: '',
+            address: '',
+            city: '',
+            state: '',
+            pincode: '',
+            dateOfBirth: ''
+          });
+        }
+      }
+    };
+
+    loadUserProfile();
+  }, [user, isDemoMode]);
 
   const handleProfileChange = (e) => {
     const { name, value } = e.target;

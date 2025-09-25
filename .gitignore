@@ -1,24 +1,165 @@
-# Logs
-logs
-*.log
+# ================================
+# COMPREHENSIVE FRONTEND GITIGNORE
+# Production-Ready Patterns
+# ================================
+
+# ===== NODE.JS & NPM =====
+node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+.npmrc
+.yarnrc
+.pnpm-debug.log*
 
-node_modules
-dist
-dist-ssr
+# ===== BUILD & DIST =====
+dist/
+dist-ssr/
+build/
+out/
+coverage/
+.nyc_output/
+lib-cov/
+*.tgz
+*.tar.gz
+
+# ===== VITE SPECIFIC =====
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# ===== ENVIRONMENT & CONFIG =====
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.staging
 *.local
+config.json
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
+# ===== LOGS & DEBUGGING =====
+logs/
+*.log
+debug.log
+error.log
+access.log
+combined.log
+exceptions.log
+rejections.log
+
+# ===== IDE & EDITOR =====
+.vscode/
+.vs/
+.idea/
 *.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+*.user
+*.userosscache
+*.sln.docstates
+*.swp
+*.swo
+*~
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ===== TESTING =====
+coverage/
+.coverage
+htmlcov/
+.tox/
+.nox/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+junit.xml
+test-results/
+
+# ===== DOCUMENTATION FILES =====
+# Remove project-specific documentation
+*_READY.md
+*_UPDATES.md
+*_SUMMARY.md
+*_GUIDE.md
+*_FIXES.md
+DEPLOYMENT_*.md
+BACKEND_*.md
+FRONTEND_*.md
+EMAIL_*.md
+SYSTEM_*.md
+LOGIN_*.md
+SBI_*.md
+*CORRECTIONS*.md
+
+# Keep essential docs
+!README.md
+!CHANGELOG.md
+!LICENSE.md
+
+# ===== TEMPORARY & CACHE =====
+tmp/
+temp/
+.tmp/
+.cache/
+.parcel-cache/
+.eslintcache
+*.pid
+*.seed
+*.pid.lock
+
+# ===== BACKUP & OLD FILES =====
+*.bak
+*.backup
+*.old
+*.orig
+*.save
+*~
+*.swp
+*.swo
+
+# ===== DEPLOYMENT CONFIGS =====
+# Remove deployment-specific configs
+*.config.backup
+deploy*.json
+railway.json
+render.yaml
+vercel.json
+netlify.toml
+.vercel/
+.netlify/
+
+# ===== SECURITY =====
+.env*
+!.env.example
+secrets/
+private/
+ssl/
+certs/
+*.key
+*.pem
+*.p12
+*.pfx
+
+# ===== DOCKER (Optional) =====
+# Uncomment if not using Docker in production
+# Dockerfile*
+# docker-compose*.yml
+# .dockerignore
+
+# ===== MISC =====
+.next/
+.nuxt/
+.vuepress/dist
+.serverless/
+.fusebox/
+.dynamodb/
+*.tsbuildinfo

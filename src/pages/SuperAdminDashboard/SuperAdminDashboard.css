@@ -35,7 +35,7 @@
 }
 
 .stat-card {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #000000; /* Solid black background */
   padding: 1.5rem;
   border-radius: 12px;
   color: white;

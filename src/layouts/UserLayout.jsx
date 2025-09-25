@@ -25,7 +25,8 @@ import {
   Person,
   History,
   Logout,
-  AccountCircle
+  AccountCircle,
+  CreditCard
 } from '@mui/icons-material';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
@@ -70,6 +71,11 @@ const UserLayout = () => {
       text: 'My Accounts',
       icon: <AccountBalance />,
       path: '/user/accounts'
+    },
+    {
+      text: 'My Cards',
+      icon: <CreditCard />,
+      path: '/user/cards'
     },
     {
       text: 'Transfer Money',

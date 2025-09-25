@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const API_BASE_URL = '/api';
+// Use environment variable or fallback to local development server
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 
+  (process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:8085/api');
 
 class ApiService {
   constructor() {
@@ -282,6 +284,10 @@ class ApiService {
     return await this.api.get('/user/loans');
   }
 
+  async getUserProfile() {
+    return await this.api.get('/user/profile');
+  }
+
   async updateProfile(profileData) {
     return await this.api.put('/user/profile', profileData);
   }
@@ -296,6 +302,35 @@ class ApiService {
 
   async getLoginHistory() {
     return await this.api.get('/user/login-history');
+  }
+
+  // Card Management APIs
+  async getUserCards() {
+    return await this.api.get('/user/cards');
+  }
+
+  async applyForCard(cardData) {
+    return await this.api.post('/user/cards/apply', cardData);
+  }
+
+  async blockCard(cardId) {
+    return await this.api.post(`/user/cards/${cardId}/block`);
+  }
+
+  async unblockCard(cardId) {
+    return await this.api.post(`/user/cards/${cardId}/unblock`);
+  }
+
+  async reissueCard(cardId) {
+    return await this.api.post(`/user/cards/${cardId}/reissue`);
+  }
+
+  async sendEncryptedCardEmail(emailData) {
+    return await this.api.post('/user/cards/send-encrypted-email', emailData);
+  }
+
+  async createDefaultCard(userData) {
+    return await this.api.post('/user/cards/create-default', userData);
   }
 }
 

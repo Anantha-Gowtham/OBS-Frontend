@@ -37,16 +37,6 @@ const Login = () => {
 
   const steps = ['Enter Credentials', 'Verify OTP'];
 
-  // Debug effect to track activeStep changes
-  React.useEffect(() => {
-    console.log('ActiveStep changed to:', activeStep);
-  }, [activeStep]);
-
-  // Debug effect to track otpData changes
-  React.useEffect(() => {
-    console.log('OtpData changed to:', otpData);
-  }, [otpData]);
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setCredentials(prev => ({
@@ -62,14 +52,11 @@ const Login = () => {
 
     try {
       const result = await login(credentials.username, credentials.password);
-      console.log('Login result:', result);
       
       if (result.success && (result.requiresOTP || result.requiresOtp)) {
-        console.log('Setting OTP data and moving to step 1');
         setOtpData({ email: result.email, otp: '' });
         setShowOTPStep(true);
         setActiveStep(1);
-        console.log('States set - showOTPStep: true, activeStep: 1');
       } else if (result.success) {
         // Direct login success (shouldn't happen with OTP enabled)
         const userRole = result.user?.role;
@@ -90,11 +77,9 @@ const Login = () => {
             navigate('/user/dashboard', { replace: true });
         }
       } else {
-        console.log('Login failed:', result.message);
         setError(result.message || 'Login failed');
       }
     } catch (error) {
-      console.error('Login exception:', error);
       setError('Login failed. Please try again.');
     } finally {
       setLoading(false);
@@ -188,11 +173,6 @@ const Login = () => {
                 </Step>
               ))}
             </Stepper>
-
-            {/* Debug Info */}
-            <Typography variant="caption" sx={{ mb: 2, display: 'block' }}>
-              Debug: Active Step = {activeStep}, Show OTP = {showOTPStep.toString()}, OTP Email = {otpData.email}
-            </Typography>
 
             {/* Error Alert */}
             {error && (

@@ -17,7 +17,7 @@ const SkeletonBlock = ({ height = 16, width = '100%', radius = 8, shimmer = true
           content: '""',
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)',
+          backgroundColor: 'rgba(255,255,255,0.4)', // Solid shimmer instead of gradient
           transform: 'translateX(-100%)',
           animation: 'skeleton-slide 1.4s linear infinite'
         } : {}

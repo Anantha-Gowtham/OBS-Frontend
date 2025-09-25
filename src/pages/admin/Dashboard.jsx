@@ -347,7 +347,7 @@ const AdminDashboard = () => {
         {summaryCards.map((card, index) => (
           <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index} data-reveal={`delay-${(index % 5) + 1}`}> 
             <Card className="fade-up" sx={{ position: 'relative', overflow: 'hidden', transition: 'transform .35s ease, box-shadow .4s ease', '&:hover': { transform: 'translateY(-4px)', boxShadow: '0 8px 30px -6px rgba(0,0,0,0.15)' } }}>
-              <CardContent sx={{ '&:after': { content: '""', position: 'absolute', inset: 0, background: 'radial-gradient(circle at 85% 15%, rgba(26,35,126,0.08), transparent 60%)', pointerEvents: 'none' } }}>
+              <CardContent sx={{ '&:after': { content: '""', position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.02)', pointerEvents: 'none' } }}>
                 <Box display="flex" alignItems="center" justifyContent="space-between">
                   <Box>
                     <Typography color="text.secondary" gutterBottom variant="h6" sx={{ fontWeight: 600, letterSpacing: '.5px' }}>

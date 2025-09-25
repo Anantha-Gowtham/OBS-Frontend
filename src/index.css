@@ -87,11 +87,9 @@ html, body, #root { transition: var(--transition-theme); }
 
 @keyframes skeleton-slide { 0% { transform: translateX(-100%);} 100% { transform: translateX(100%);} }
 
-/* Subtle gradient shimmer background helper */
-.gradient-animated {
-	background: linear-gradient(140deg,#121B38,#1C2A52,#243665,#121B38);
-	background-size: 300% 300%;
-	animation: shimmerSlow 18s ease-in-out infinite;
+/* Solid color background helper */
+.solid-black-animated {
+	background: #000000; /* Solid black background */
 }
 
 /* Page transition */
